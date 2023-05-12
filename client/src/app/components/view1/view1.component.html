@@ -1,1 +1,27 @@
-<p>view1 works!</p>
+<h2>Upload Form</h2>
+
+<form [formGroup]="form" (ngSubmit)="processform()">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" formControlName="name"></td>
+    </tr>
+    <tr>
+      <td>Title:</td>
+      <td><input type="text" formControlName="title"></td>
+    </tr>
+    <tr>
+      <td>Comments:</td>
+      <td><textarea formControlName="comments" cols="30" rows="10"></textarea></td>
+    </tr>
+    <tr>
+      <td>Archive:</td>
+      <td><input type="file" formControlName="zipfile" accept=".zip" (change)="filechange($event)"></td>
+    </tr>
+  </table>
+  <br>
+
+  <button type="button" [routerLink]="['/']">Cancel</button>
+  <span>&nbsp;</span>
+  <button type="submit" [disabled]="form.invalid" >Submit</button>
+</form>
