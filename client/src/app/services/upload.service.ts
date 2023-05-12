@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { uploadrequest } from '../models/models';
+import { firstValueFrom, map } from 'rxjs';
 
-const URL : string = "http://localhost:8080/api/fileupload"
+const URL : string = "http://localhost:8080/api/upload"
 
 @Injectable({
   providedIn: 'root'
@@ -10,26 +11,26 @@ const URL : string = "http://localhost:8080/api/fileupload"
 export class UploadService {
 
   constructor(private http:HttpClient) { }
-
-
-
-  uploadArchive(newrequest : uploadrequest){
+  uploadArchive(newrequest : uploadrequest) : Promise<any> {
     const formData = new FormData();
     formData.append("file", newrequest.selectedfile);
     formData.append("name", newrequest.name);
     formData.append("title", newrequest.title);
-    formData.append("comments", newrequest.comments);
-    const upload$ = this.http.post(URL, formData);
-    upload$.subscribe({
-      next:v => {
-        console.log(v)
-      },
-      error: err =>{
-        console.error("error : " + err)
-      },
-      complete: () => {
-        console.warn("completed...")        
-      }
-    });
+    if (!newrequest.comments){
+      formData.append("comments", "-");
+    }else{
+      formData.append("comments", newrequest.comments);
+    }
+    
+    return firstValueFrom(
+      this.http.post(URL, formData)
+      .pipe(
+        map((v:any)=>{
+          const bundleId = v["bundleId"] as any
+          return bundleId
+        })
+      )
+    )
+
   }
 }

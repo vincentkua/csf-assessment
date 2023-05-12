@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { uploadrequest } from 'src/app/models/models';
 import { UploadService } from 'src/app/services/upload.service';
 
@@ -14,7 +15,7 @@ export class View1Component implements OnInit {
   fileSelected : File | null = null
   
 
-  constructor(private fb:FormBuilder , private uploadSvc : UploadService){}
+  constructor(private fb:FormBuilder , private uploadSvc : UploadService , private router : Router){}
 
   ngOnInit(): void {
       this.form = this.fb.group({
@@ -43,11 +44,22 @@ export class View1Component implements OnInit {
     if (this.fileSelected != null) {
       newrequest.selectedfile = this.fileSelected
       this.uploadSvc.uploadArchive(newrequest)
+      .then(v=>{
+        console.log(v)
+        const bundleId = v
+        this.router.navigate(['/details' , bundleId])
+      })
+
+      .catch(err=>{
+         console.error(err)
+         alert("error : unable to upload files")
+      }
+       
+      )
       
     } else{
-      alert("Zip file Not Selected?")
+      alert("File Not Selected ?")
     }
-    // now call Svc to upload...   
 
 
   }
