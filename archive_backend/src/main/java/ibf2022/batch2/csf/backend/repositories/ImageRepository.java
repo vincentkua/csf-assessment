@@ -28,9 +28,8 @@ public class ImageRepository {
 
 	//TODO: Task 3
 	// You are free to change the parameter and the return type
-	// Do not change the method's name !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! OBJECT !!!
-
-    // Unable to Unzip and upload.... process with 1 photo 1st...
+	// Do not change the method's name
+   
 	public Object upload(MultipartFile file , String name , String title, String comments ) throws IOException {
    
         Map<String, String> userData = new HashMap<>();
@@ -68,6 +67,39 @@ public class ImageRepository {
 		return "myobject%s.%s".formatted(key, filenameExt);
 
 
+        // ####### Unable to Unzip and upload.... Below are the codes to be corrected... #######
+        // List<String> uploadedFiles = new ArrayList<>();
+        // try (ZipInputStream zipInputStream = new ZipInputStream(file.getInputStream())) {
+        //     ZipEntry entry;
+        //     while ((entry = zipInputStream.getNextEntry()) != null) {
+        //         if (!entry.isDirectory()) {
+        //             String fileName = entry.getName();
+        //             System.out.println(fileName);
+        //             String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        //             if (fileExtension.matches("(?i)(jpg|jpeg|png|gif|bmp)")) { // check if the file is an image
+        //                 Map<String, String> userData = new HashMap<>();
+        //                 userData.put("name", fileName);
+        //                 userData.put("title", "Image " + fileName);
+        //                 userData.put("comments", "Uploaded using zip file");
+        //                 userData.put("uploadDateTime", LocalDateTime.now().toString());
+        //                 userData.put("originalFilename", fileName);
+        //                 ObjectMetadata metadata = new ObjectMetadata();
+        //                 metadata.setContentType(getContentType(fileExtension));
+        //                 metadata.setContentLength(entry.getSize());
+        //                 metadata.setUserMetadata(userData);
+        //                 String key = UUID.randomUUID().toString().substring(0, 8);
+        //                 PutObjectRequest putRequest = new PutObjectRequest(bucketName, "myobject%s.%s".formatted(key, fileExtension),
+        //                         zipInputStream, metadata);
+        //                 putRequest.withCannedAcl(CannedAccessControlList.PublicRead);
+        //                 System.out.println("uploading");
+        //                 s3Client.putObject(putRequest); // the while loop stuckded here....
+        //                 uploadedFiles.add("myobject%s.%s".formatted(key, fileExtension));
+        //             }
+        //         }
+        //     }
+        // }
+        // return uploadedFiles;
+
+
 	}
-}
-;
+};

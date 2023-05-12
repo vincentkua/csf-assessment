@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, map } from 'rxjs';
 import { archive } from '../models/models';
 
-const URL : string = "http://localhost:8080"
+// const URL : string = "http://localhost:8080"
+const URL : string = "https://vk-csfassessment-production.up.railway.app"
 
 @Injectable({
   providedIn: 'root'

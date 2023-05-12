@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { uploadrequest } from '../models/models';
 import { firstValueFrom, map } from 'rxjs';
 
-const URL : string = "http://localhost:8080/upload"
+// const URL : string = "http://localhost:8080"
+const URL : string = "https://vk-csfassessment-production.up.railway.app"
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class UploadService {
     }
     
     return firstValueFrom(
-      this.http.post(URL, formData)
+      this.http.post(URL+"/upload", formData)
       .pipe(
         map((v:any)=>{
           const bundleId = v["bundleId"] as any
