@@ -1,11 +1,15 @@
 package ibf2022.batch2.csf.backend.repositories;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import ibf2022.batch2.csf.backend.models.Archive;
@@ -33,8 +37,8 @@ public class ArchiveRepository {
 		toinsert.put("title", newarchive.getTitle()); 
 		toinsert.put("name", newarchive.getName()); 
 		toinsert.put("comments", newarchive.getComments()); 
-		toinsert.put("url", newarchive.getUrls()); 
-		Document newDoc = mongoTemplate.insert(toinsert, "archieves"); 
+		toinsert.put("urls", newarchive.getUrls()); 
+		Document newDoc = mongoTemplate.insert(toinsert, "archives"); 
 		System.out.println("New Archive Inserted: " + newDoc); 		
 		return bundleId;
 	}
@@ -45,8 +49,15 @@ public class ArchiveRepository {
 	// Write the native mongo query that you will be using in this method
 	//
 	//
-	public Object getBundleByBundleId(/* any number of parameters here */) {
-		return null;
+	// db.archives.findOne({ bundleId: bundleId })
+	public Object getBundleByBundleId(String bundleId) {
+		Archive archive = new Archive(); 
+        Query query = Query.query(Criteria.where("bundleId").is(bundleId)); 
+		archive = mongoTemplate.findOne(query, Archive.class, "archives"); 
+
+		// System.out.println(archive);
+
+		return archive;
 	}
 
 	//TODO: Task 6
@@ -55,8 +66,12 @@ public class ArchiveRepository {
 	// Write the native mongo query that you will be using in this method
 	//
 	//
-	public Object getBundles(/* any number of parameters here */) {
-		return null;
+	// db.archives.find({})
+	public Object getBundles() {
+
+		List<Archive> archives = new LinkedList<>();
+		archives = mongoTemplate.find(new Query(), Archive.class, "archives"); 
+		return archives; 
 	}
 
 

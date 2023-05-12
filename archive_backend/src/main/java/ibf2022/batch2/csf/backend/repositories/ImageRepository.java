@@ -31,7 +31,7 @@ public class ImageRepository {
 	// Do not change the method's name !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! OBJECT !!!
 
     // Unable to Unzip and upload.... process with 1 photo 1st...
-	public String upload(MultipartFile file , String name , String title, String comments ) throws IOException {
+	public Object upload(MultipartFile file , String name , String title, String comments ) throws IOException {
    
         Map<String, String> userData = new HashMap<>();
 		userData.put("name", name);

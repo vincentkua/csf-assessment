@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { uploadrequest } from '../models/models';
 import { firstValueFrom, map } from 'rxjs';
 
-const URL : string = "http://localhost:8080/api/upload"
+const URL : string = "http://localhost:8080/upload"
 
 @Injectable({
   providedIn: 'root'

@@ -5,3 +5,12 @@ export interface uploadrequest{
     zipfile : string ;
     selectedfile : File
 }
+
+export interface archive{
+    bundleId : string;
+    title : string;
+    name : string;
+    date : Date;
+    comments : string;
+    urls : string[];
+}

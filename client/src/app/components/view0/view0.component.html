@@ -2,6 +2,15 @@
 
 <button [routerLink]="['/upload']">Upload</button>
 
-<hr>
 
-<p>list of archive</p>
+<br>
+<br>
+
+<div *ngIf="bundles"> 
+    <div *ngFor="let bundle of bundles" [routerLink]="['/details' , bundle.bundleId]" style="background-color: rgb(182, 220, 253) ; max-width: 400px; margin-bottom: 5px; padding:10px; cursor: pointer;">    
+        <span style="font-weight: bold;">{{bundle.title}}</span>
+        <span style="float: right;">{{ bundle.date}}</span>
+
+    </div>
+
+</div>

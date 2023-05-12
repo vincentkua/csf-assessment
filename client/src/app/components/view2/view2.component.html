@@ -1,1 +1,17 @@
-<p>view2 works!</p>
+<!-- <h2>View 2 - Details Page ({{bundleId}})</h2> -->
+
+<div *ngIf="arcdetails">
+    <h2>{{arcdetails.title}}</h2>
+    <p>by {{arcdetails.name}} on {{arcdetails.date}}</p>
+    <p>{{arcdetails.comments}}</p>
+
+    <div *ngFor="let x of arcdetails.urls">
+        <div><img src="{{x}}" style="width: 300px;" alt="Not Image File"></div>
+        <a href="{{x}}" target="_blank">{{x}}</a>
+        
+    </div>
+</div>
+
+<br>
+
+<button (click)="backtoview1()">Back</button>
