@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button class="example-icon favorite-icon" [routerLink]="['/']">
+      <mat-icon aria-hidden="home icon" fontIcon="home"></mat-icon>
+    </button>
+    <span>Photo Archive App</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div style="padding: 30px;">
+  <router-outlet></router-outlet>
+</div>
